@@ -1,5 +1,5 @@
 .vscode
 .idea
-env
 .env
+env
 monique/app/__pycache__
