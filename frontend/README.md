@@ -1,0 +1,1 @@
+React in its own "frontend" Django app: load a single HTML template and let React manage the frontend 
