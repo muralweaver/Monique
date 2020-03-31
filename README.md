@@ -1,5 +1,9 @@
-![alt text](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.cdn.turner.com%2Fv5cache%2FCARTOON%2Fsite%2FImages%2Fi24%2Fpropd_fj_bub_174x252.png&f=1&nofb=1.png)
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Panda_icon.svg/240px-Panda_icon.svg.png)
 
+<<<<<<< HEAD
 # monique PRM
+=======
+# Monique PRM
+>>>>>>> a57f1351c84566ba30708e3c37cea66c55cf4580
 
 Inspired by [Monica](https://github.com/monicahq)
