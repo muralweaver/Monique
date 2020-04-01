@@ -39,12 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
+    'corsheaders',
     'api'
 ]
+
+#  Added a piece of custom CORS middleware, making sure to place it place it above any middleware that generates responses such as Django’s CommonMiddleware
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -133,6 +137,7 @@ STATIC_URL = '/static/'
 
 # The option GRAPH_MODELS = {} can be used in the settings file to specify default options:
 # https://django-extensions.readthedocs.io/en/latest/graph_models.html
+
 GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
@@ -151,4 +156,26 @@ LOGGING = {
             "level": "DEBUG",
         },
     },
+}
+# We set the DEFAULT_PERMISSION_CLASSES, which in this case will require a request to be authenticated before it is processed unless specified otherwise. Then, we set the DEFAULT_AUTHENTICATION_CLASSES, which determines which authentication methods the server will try when it receives a request, in descending order.
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:3000',
+# )
+
+# Default JWT response handler,
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'monique.utils.my_jwt_response_handler'
 }
