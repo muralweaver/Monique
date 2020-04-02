@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
-    'api'
+    'api',
+    'frontend'
 ]
 
 #  Added a piece of custom CORS middleware, making sure to place it place it above any middleware that generates responses such as Django’s CommonMiddleware
