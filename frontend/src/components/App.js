@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import Nav from "./Nav";
 import LoginForm from "./LoginForm";
+import Footer from "./Footer";
 class App extends Component {
   // Component’s state is initialized and the logged_in property is determined based on whether or not a token can be found in local storage
   constructor(props) {
@@ -12,13 +13,13 @@ class App extends Component {
       placeholder: "Loading",
       displayed_form: "",
       logged_in: localStorage.getItem("token") ? true : false,
-      username: ""
+      username: "",
     };
   }
 
   componentDidMount() {
     fetch("api/contact")
-      .then(response => {
+      .then((response) => {
         if (response.status > 400) {
           return this.setState(() => {
             return { placeholder: "Something went wrong!" };
@@ -26,11 +27,11 @@ class App extends Component {
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         this.setState(() => {
           return {
             data,
-            loaded: true
+            loaded: true,
           };
         });
       });
@@ -38,11 +39,11 @@ class App extends Component {
       fetch("http://localhost:8000/api/current_user/", {
         headers: {
           // Each request to the API which requires the user to be authenticated will need to include this header, in this format, in order for the request to be processed.
-          Authorization: `JWT ${localStorage.getItem("token")}`
-        }
+          Authorization: `JWT ${localStorage.getItem("token")}`,
+        },
       })
-        .then(res => res.json())
-        .then(json => {
+        .then((res) => res.json())
+        .then((json) => {
           this.setState({ username: json.username });
         });
     }
@@ -52,17 +53,17 @@ class App extends Component {
     fetch("http://localhost:8000/api/auth/", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(json => {
+      .then((res) => res.json())
+      .then((json) => {
         localStorage.setItem("token", json.token);
         this.setState({
           logged_in: true,
           displayed_form: "",
-          username: json.user.username
+          username: json.user.username,
         });
       });
   };
@@ -91,9 +92,9 @@ class App extends Component {
     this.setState({ logged_in: false, username: "" });
   };
 
-  display_form = form => {
+  display_form = (form) => {
     this.setState({
-      displayed_form: form
+      displayed_form: form,
     });
   };
 
@@ -111,7 +112,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        {this.state.data.map(contact => {
+        {this.state.data.map((contact) => {
           return (
             <li key={contact.id}>
               {contact.name} - {contact.email}
@@ -129,6 +130,7 @@ class App extends Component {
             ? `Hello, ${this.state.username}`
             : "Please Log In"}
         </h3>
+        <Footer/>
       </div>
     );
   }
