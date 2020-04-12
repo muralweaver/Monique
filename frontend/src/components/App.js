@@ -125,7 +125,7 @@ class App extends Component {
           handle_logout={this.handle_logout}
         />
         <h3>
-          {this.state.logged_in
+          {this.state.logged_ingit 
             ? `Hello, ${this.state.username}`
             : "Please Log In"}
         </h3>
