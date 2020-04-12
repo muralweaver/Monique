@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar'
 function Nav(props) {
   const logged_out_nav = (
   <AppBar position="static">
-    <ul className="menu  align-right">
+    <ul className="">
       <li onClick={() => props.display_form('login')}>login</li>
       <li onClick={() => props.display_form('signup')}>signup</li>
     </ul>
