@@ -42,6 +42,6 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ContactListCreate(generics.ListCreateAPIView): 
-    queryset = Contact.objects.all() 
+class ContactListCreate(generics.ListCreateAPIView):
+    queryset = Contact.objects.all()
     serializer_class = ContactSerializer
