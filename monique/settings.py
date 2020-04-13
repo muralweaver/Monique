@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from dotenv import load_dotenv, find_dotenv
 
+from django.conf.global_settings import DATABASES
+from dotenv import load_dotenv, find_dotenv
+import dj_database_url
 
 load_dotenv(find_dotenv())
 
@@ -85,20 +87,9 @@ WSGI_APPLICATION = 'monique.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'xxx',
-    #     'USER': 'xxx',
-    #     'PASSWORD': 'xxx',
-    #     'HOST': 'ec2-xx-2x7-xxx-1x9.eu-west-1.compute.amazonaws.com',
-    #     'PORT': '5432',
-    # },
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-}
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
+
 
 
 # Password validation
