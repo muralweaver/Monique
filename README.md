@@ -2,4 +2,6 @@
 
 # Monique PRM
 
+---
+
 Inspired by [Monica](https://github.com/monicahq)
