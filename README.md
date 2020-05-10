@@ -3,3 +3,8 @@
 # Monique PRM
 
 Inspired by [Monica](https://github.com/monicahq)
+
+
+## References
+
+- [Monica API Documentation](https://www.monicahq.com/api/overview)

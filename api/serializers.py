@@ -2,10 +2,10 @@ from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 from .models import Contact
+from .models import Note
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = ('username',)
@@ -15,7 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
 # When a user signs up, we want the response from the server to include both their relevant user data (in this case, just the username), as well as the token, which will be stored in the browser for further authentication
 
 class UserSerializerWithToken(serializers.ModelSerializer):
-
     token = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)
 
@@ -46,5 +45,10 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ('id', 'firstName', 'lastName', 'email', 'phone', 'description')
-        
+
+
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('body',)
 # We're subclassing ModelSerializer. A ModelSerializer in Django REST is like a ModelForm. It is suitable whenever you want to closely map a Model to a Serializer.

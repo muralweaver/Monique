@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Contact
+from .models import Contact, Note
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view
-from .serializers import ContactSerializer, UserSerializer, UserSerializerWithToken
+from .serializers import ContactSerializer, UserSerializer, UserSerializerWithToken, NoteSerializer
 
 
 def home(request):
@@ -42,6 +42,11 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ContactListCreate(generics.ListCreateAPIView): 
-    queryset = Contact.objects.all() 
+class ContactListCreate(generics.ListCreateAPIView):
+    queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+
+class NoteListCreate(generics.ListCreateAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
