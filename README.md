@@ -2,8 +2,6 @@
 
 # Monique
 
----
-
 Inspired by [Monica](https://github.com/monicahq)
 
 
