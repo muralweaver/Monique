@@ -2,9 +2,12 @@
 
 # Monique
 
-Inspired by [Monica](https://github.com/monicahq)
+A Personal Relationship Management tool
+
 
 
 ## References
 
 - [Monica API Documentation](https://www.monicahq.com/api/overview)
+
+Inspired by [Monica](https://github.com/monicahq)
