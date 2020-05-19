@@ -8,3 +8,4 @@ Inspired by [Monica](https://github.com/monicahq)
 ## References
 
 - [Monica API Documentation](https://www.monicahq.com/api/overview)
+- [The Twelve-Factor App](https://www.12factor.net/backing-services)
