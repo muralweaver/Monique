@@ -21,7 +21,7 @@ class Contact(models.Model):
 class Note(models.Model):
     body = models.TextField("Body", max_length=2000, blank=False, null=False)
     # account = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    contact = models.ForeignKey(Contact, default=1, on_delete=models.CASCADE, null=False)
+    # contact = models.ForeignKey(Contact, default=1, on_delete=models.CASCADE, null=False)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -38,7 +38,7 @@ class Debt(models.Model):
     reason = models.CharField("Reason", max_length=255)
     progress = models.CharField("Progress", max_length=255, choices=PROGRESS)
     created = models.DateTimeField(auto_now_add=True)
-    contact = models.ForeignKey('Contact', default=1, on_delete=models.SET_DEFAULT, related_name='lender')
+    # contact = models.ForeignKey('Contact', default=1, on_delete=models.SET_DEFAULT, related_name='lender')
 
     '''
         The Debt object allows to record that you own to contacts, or what your contacts own you.

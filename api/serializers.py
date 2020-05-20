@@ -44,16 +44,16 @@ from .models import Note
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ('id', 'firstName', 'lastName', 'email', 'phone', 'description', 'createdAt')
+        fields = ('id', 'firstName', 'lastName', 'email', 'phone', 'description', 'createdAt',)
 
 
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ('id', 'body', 'contact', 'created', 'updated')
+        fields = ('id', 'body', 'created', 'updated',)
 
 
 class DebtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debt
-        fields = ('id', 'amount', 'reason', 'progress', 'created')
+        fields = ('id', 'amount', 'reason', 'progress', 'created',)
