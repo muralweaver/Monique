@@ -1,13 +1,14 @@
-from django.urls import path
-from . import views
-from rest_framework_jwt.views import obtain_jwt_token
-from .views import current_user, UserList
+from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
+from .views import NoteList, DebtList, ContactList
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('notes', NoteList),
+router.register('contacts', ContactList),
+router.register('debts', DebtList)
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('contact/', views.ContactListCreate.as_view()),
-    path('note/', views.NoteListCreate.as_view()),
-    path('current_user/', current_user),
-    path('users/', UserList.as_view()),
-    path('auth/', obtain_jwt_token)
+    path('', include(router.urls)),
+
 ]
