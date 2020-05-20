@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+
 # from django.core.validators import MaxLengthValidator, MinLengthValidator
 # from rest_framework import request, status
 # from rest_framework.response import Response
 
 
 class Contact(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    account = models.ForeignKey(User, on_delete=models.CASCADE)
     firstName = models.CharField("First name", max_length=30, blank=False, null=False)
     lastName = models.CharField("Last name", max_length=30, blank=True, null=True)
     email = models.EmailField()
@@ -21,7 +23,7 @@ class Contact(models.Model):
 
 
 class Note(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    account = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField("Body", max_length=2000, blank=False, null=False)
     date_modified = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -44,7 +46,7 @@ class Debt(models.Model):
         (0, 'In Progress'),
         (1, 'Paid')
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    account = models.ForeignKey(User, on_delete=models.CASCADE)
     lender = models.ForeignKey(Contact, default=1, on_delete=models.CASCADE)
     amount = models.DecimalField(decimal_places=2, max_digits=6)
     reason = models.CharField("Reason", max_length=255)
