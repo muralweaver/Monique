@@ -1,29 +1,39 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxLengthValidator, MinLengthValidator
+# from django.core.validators import MaxLengthValidator, MinLengthValidator
+# from rest_framework import request, status
+# from rest_framework.response import Response
 
 
 class Contact(models.Model):
-    # account = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     firstName = models.CharField("First name", max_length=30, blank=False, null=False)
     lastName = models.CharField("Last name", max_length=30, blank=True, null=True)
     email = models.EmailField()
-    phone = models.CharField(max_length=13, blank=True, null=True)
+    phone = models.CharField(max_length=13, null=True)
     address = models.TextField(blank=True, null=True)
     # perception = models.IntegerField(validators=[MinLengthValidator(1), MaxLengthValidator(5)])
     description = models.TextField(blank=True, null=True)
-    createdAt = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.firstName, self.lastName
 
 
 class Note(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField("Body", max_length=2000, blank=False, null=False)
-    # account = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    # contact = models.ForeignKey(Contact, default=1, on_delete=models.CASCADE, null=False)
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    # def create(self, request, *args, **kwargs):
+    #     user = User(created_by=self.request.user)
+    #     serializer = self.serializer_class(user, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     else:
+    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def __str__(self):
         return self.body
@@ -34,11 +44,12 @@ class Debt(models.Model):
         (0, 'In Progress'),
         (1, 'Paid')
     )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    lender = models.ForeignKey(Contact, default=1, on_delete=models.CASCADE)
     amount = models.DecimalField(decimal_places=2, max_digits=6)
     reason = models.CharField("Reason", max_length=255)
     progress = models.CharField("Progress", max_length=255, choices=PROGRESS)
-    created = models.DateTimeField(auto_now_add=True)
-    # contact = models.ForeignKey('Contact', default=1, on_delete=models.SET_DEFAULT, related_name='lender')
+    date_created = models.DateTimeField(auto_now_add=True)
 
     '''
         The Debt object allows to record that you own to contacts, or what your contacts own you.

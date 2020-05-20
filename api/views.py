@@ -1,29 +1,29 @@
 from .models import Contact, Note, Debt
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ContactSerializer, NoteSerializer, DebtSerializer
 
 
-class ContactList(viewsets.ModelViewSet):
+class ContactList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
     authentication_classes = (TokenAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
 
-class NoteList(viewsets.ModelViewSet):
+class NoteList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     authentication_classes = (TokenAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
 
-class DebtList(viewsets.ModelViewSet):
+class DebtList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
     queryset = Debt.objects.all()
     serializer_class = DebtSerializer
     authentication_classes = (TokenAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
 # This view will be used anytime the user revisits the site, reloads the page, or does anything else that causes React to forget its state. React will check if the user has a token stored in the browser, and if a token is found, it’ll make a request to this view
 #
