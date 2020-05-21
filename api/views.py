@@ -1,8 +1,11 @@
-from .models import Contact, Note, Debt
-from rest_framework import viewsets, generics
+import os
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from .models import Contact, Note, Debt, Documents
+from rest_framework import viewsets, generics, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ContactSerializer, NoteSerializer, DebtSerializer
+from .serializers import ContactSerializer, NoteSerializer, DebtSerializer, DocumentSerializer
 
 
 class ContactList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
@@ -25,30 +28,21 @@ class DebtList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-# This view will be used anytime the user revisits the site, reloads the page, or does anything else that causes React to forget its state. React will check if the user has a token stored in the browser, and if a token is found, it’ll make a request to this view
-#
-# @api_view(['GET'])
-# def current_user(request):
-#     """
-#     Determine the current user by their token, and return their data
-#     """
-#
-#     serializer = UserSerializer(request.user)
-#     return Response(serializer.data)
-#
-#
-# class UserList(APIView):
-#     """
-#     Create a new user. It's called 'UserList' because normally we'd have a get
-#     method here too, for retrieving a list of all User objects.
-#     """
-#
-#     permission_classes = (permissions.AllowAny,)
-#
-#     def post(self, request, format=None):
-#         serializer = UserSerializerWithToken(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
+
+class DocumentUploadView(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
+    queryset = Documents.objects.all()
+    serializer_class = DocumentSerializer
+    # API needs to know which headers to look for. Browsers transfer files as form-data
+    parser_classes = (MultiPartParser, FormParser,)
+
+    def perform_create(self, serializer):
+        file = str(self.request.data.get('file'))
+        # file_size = os.stat('static/{}'.format(file)).st_size
+        # if file_size > 5242880:
+        #     raise Response(status=status.HTTP_403_FORBIDDEN)
+        serializer.save(
+            # account=self.request.user,
+            type=file[-3:],
+            filesize=0,
+            filename=file[:10]
+        )

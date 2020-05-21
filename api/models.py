@@ -61,6 +61,21 @@ class Debt(models.Model):
     def __str__(self):
         return self.contact
 
+
+# The Document object represents a document attached to a contact.
+class Documents(models.Model):
+    account = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    contact = models.ForeignKey(Contact, default=2, on_delete=models.CASCADE)
+    file = models.FileField(blank=False, null=False, upload_to="static/")
+    filename = models.CharField("filename", max_length=255, default='')
+    filesize = models.IntegerField(default=0)
+    type = models.CharField("type", max_length=30, default='')
+    date_modified = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.original_filename
+
 # class Country(models.Model):
 #     name = models.CharField("Name", max_length=255, blank=False, null=False)
 #
