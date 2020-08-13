@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 
 class Contact(models.Model):
-    account = models.ForeignKey(User, on_delete=models.CASCADE)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
     firstName = models.CharField("First name", max_length=30, blank=False, null=False)
     lastName = models.CharField("Last name", max_length=30, blank=True, null=True)
     email = models.EmailField()

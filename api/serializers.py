@@ -1,18 +1,19 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import Contact, Debt, Documents
-from .models import Note
+from .models import Contact, Debt, Documents, Note
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'password')
+        # make password write only to hide it in GET requests. Will be required if request is POST
         extra_kwargs = {'password': {'write_only': True, 'required': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
+        # create user token on signup
         Token.objects.create(user=user)
         return user
 
