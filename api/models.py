@@ -27,7 +27,7 @@ class Contact(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.firstName, self.lastName
+        return self.first_name, self.last_name
 
 
 class Note(models.Model):
