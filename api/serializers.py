@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import Contact, Debt, Documents, Note
+from .models import Contact, Debt, Documents, Note, Journal
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -22,8 +22,9 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = (
-        'id', 'account', 'first_name', 'last_name', 'nickname', 'gender', 'is_dead', 'email', 'phone', 'description',
-        'date_created')
+            'id', 'account', 'first_name', 'last_name', 'nickname', 'gender', 'is_dead', 'email', 'phone',
+            'description',
+            'date_created')
         read_only_fields = ('date_created',)
 
 
@@ -46,3 +47,10 @@ class DocumentSerializer(serializers.ModelSerializer):
         model = Documents
         fields = "__all__"
         # read_only_fields = ('account', 'contact', 'date_created', 'date_modified')
+
+
+class JournalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Journal
+        fields = ("id", "account", "title", "body", "date_created", "date_modified")
+        read_only_fields = ("date_created", "date_modified")
