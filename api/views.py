@@ -1,5 +1,3 @@
-import os
-
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -17,7 +15,16 @@ class UserList(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAdminUser,)
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action == 'list':
+            permission_classes = [IsAdminUser]
+        else:
+            permission_classes = []
+        return [permission() for permission in permission_classes]
 
 
 # https://github.com/encode/django-rest-framework/issues/2414
@@ -40,6 +47,18 @@ class JournalList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
     serializer_class = JournalSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        username = self.request.user.username
+        serializer.save(created_by=username)
+
+    def get_queryset(self):
+        """
+        This view should return a list of all Tasks
+        for the currently authenticated user.
+        """
+        username = self.request.user.username
+        return Journal.objects.filter(created_by=username)
 
 
 class NoteList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):

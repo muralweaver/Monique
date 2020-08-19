@@ -48,15 +48,17 @@ class Note(models.Model):
     def __str__(self):
         return self.body
 
+
 class Journal(models.Model):
-    account = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField("Title", max_length=255, blank=False, null=False)
     body = models.TextField("Body", max_length=10000, blank=False, null=False)
     date_modified = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(max_length=255)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
 
 class Debt(models.Model):
     PROGRESS = (

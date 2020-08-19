@@ -7,9 +7,9 @@ from .models import Contact, Debt, Documents, Note, Journal
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'password')
+        fields = ('id', 'username', 'password', 'first_name', 'last_name', 'email')
         # make password write only to hide it in GET requests. Will be required if request is POST
-        extra_kwargs = {'password': {'write_only': True, 'required': True}}
+        extra_kwargs = {'password': {'write_only': True, 'required': True}, 'email': {'required': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
@@ -52,5 +52,8 @@ class DocumentSerializer(serializers.ModelSerializer):
 class JournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
-        fields = ("id", "account", "title", "body", "date_created", "date_modified")
-        read_only_fields = ("date_created", "date_modified")
+        fields = ("id", "title", "body", "date_created", "date_modified")
+        read_only_fields = ("date_created", "date_modified",)
+        extra_kwargs = {
+            'created_by': {'read_only': True}
+        }
