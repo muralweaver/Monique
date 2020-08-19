@@ -7,21 +7,17 @@ from rest_framework.response import Response
 from .models import Contact, Note, Debt, Documents, Journal
 from rest_framework import viewsets, generics, status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from .serializers import (
-    ContactSerializer,
-    NoteSerializer,
-    DebtSerializer,
-    DocumentSerializer,
-    UserSerializer,
-    JournalSerializer,
-)
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from .serializers import (ContactSerializer, NoteSerializer, DebtSerializer, DocumentSerializer, UserSerializer,
+                          JournalSerializer, )
 from django.contrib.auth.models import User
 
 
 class UserList(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAdminUser,)
 
 
 # https://github.com/encode/django-rest-framework/issues/2414
