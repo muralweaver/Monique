@@ -95,7 +95,7 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'monique',
+        'NAME': 'monique-db-dev-3',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
@@ -165,23 +165,18 @@ LOGGING = {
         },
     },
 }
-# We set the DEFAULT_PERMISSION_CLASSES, which in this case will require a request to be authenticated before it is processed unless specified otherwise. Then, we set the DEFAULT_AUTHENTICATION_CLASSES, which determines which authentication methods the server will try when it receives a request, in descending order.
 
+# We set the DEFAULT_PERMISSION_CLASSES, which in this case will require a request to be authenticated before it is processed unless specified otherwise. Then, we set the DEFAULT_AUTHENTICATION_CLASSES, which determines which authentication methods the server will try when it receives a request, in descending order.
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    #     'rest_framework.authentication.BasicAuthentication',
-    # ),
 }
 
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
+    'http://localhost:3000', 'http://localhost:19006',
 )
 
 # Default JWT response handler,

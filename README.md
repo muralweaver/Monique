@@ -6,6 +6,11 @@ A Personal Relationship Management tool
 
 ...
 
+## Developer Installation
+
+```...```
+
+## API Documentation
 
 <!--**The rest of this document describes how to use some parts of Monique's API**-->
 
@@ -55,15 +60,19 @@ POST /api/journal/
 ```
 {
     "id": 11,
-    "account": 1,
     "title": "Just another winter",
     "body": "Christmas has just past and tomorrow is New Years' Eve. We had a quiet Christmas, actually it got messed up. My father-in-law decided to act like an ass. So I had a bad start to the holidays. Now I find I have a reacurring bladder infection. I am now on my second round of antibiotics. I am still waiting for a break in my writing career. I was sent an email to write articles so I decided to go for it. The only problem is the pay is not great, but at this point I will do it. I am still waiting for a reply. As for New Year's I don't know what we are doing. I just hope this year brings some good fortune.",
     "date_created": "2020-08-18T11:43:08.767002Z",
     "date_modified": "2020-08-18T11:43:08.765903Z"
 }
 ```
+<!--Self describing APIs
+The browsable API that REST framework provides makes it possible for your API to be entirely self describing. The documentation for each API endpoint can be provided simply by visiting the URL in your browser.-->
 
 ### Authentication & Permissions
+
+The Django’s built-in authentication system is great. For the most part we can use it out-of-the-box, saving a lot of development and testing effort. But we found ourselves needing to do some fine adjustment to fit our Web application i.e. storing a bit more data related to our User model.
+
 #### Token Authentication
 This authentication scheme uses a simple token-based HTTP Authentication scheme. Token authentication is appropriate for client-server setups, such as native desktop and mobile clients.
  
@@ -78,6 +87,16 @@ POST /auth/
     "id": 1
 }
 ```
+#### Permissions
+
+Permissions are run at the very start of the view, before any code within the view is executed. Therefore, a user must be both authenticated and authorised before the API can fulfil the user’s request unless a permission class which allows unrestricted access, regardless of if the request was authenticated or unauthenticated is explicitly used on a view.
+ 
+Some requests for unauthorised users will only be permitted if the request method is one of the "safe" methods; `GET`, `HEAD` or `OPTIONS`.
+
+> Together with authentication and throttling, permissions determine whether a request should be granted or denied access. - [DRF documentation](https://www.django-rest-framework.org/api-guide/permissions/)
+
+##### Object Level Permissions
+123....
 
 ##### User
 The user represents the user you are currently logged in for each API call.
@@ -86,6 +105,7 @@ The user represents the user you are currently logged in for each API call.
 
 - [Monica API Documentation](https://www.monicahq.com/api/overview)
 - [Django Rest Framework](https://www.django-rest-framework.org/)
+- [Adding Object Level Permissions](https://dragonprogrammer.com/object-level-permissions-drf/)
 - [DRF File Upload](https://medium.com/@jxstanford/django-rest-framework-file-upload-e4bc8de669c0)
 
 Inspired by [Monica](https://github.com/monicahq)
