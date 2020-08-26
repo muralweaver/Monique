@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import Contact, Journal
+from .models import Contact, Journal, Debt
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -18,17 +18,32 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+class DebtSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Debt
+        fields = ('id', 'amount', 'reason', 'progress', 'contact', 'owes', 'date_created')
+        read_only_fields = ('date_created', 'date_modified')
+
+
 class ContactSerializer(serializers.ModelSerializer):
+    debts = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Contact
         fields = (
             'id', 'first_name', 'last_name', 'nickname', 'gender', 'is_dead', 'email', 'phone',
-            'description',
-            'date_created')
+            'description', 'debts', 'date_created')
         read_only_fields = ('date_created',)
         extra_kwargs = {
             'created_by': {'read_only': True}
         }
+
+        def create(self, validated_data):
+            debts_data = validated_data.pop('debts')
+            contact = Contact.objects.create(**validated_data)
+            for debt_data in debts_data:
+                Debt.objects.create(contact=contact, **debt_data)
+            return contact
 
 
 class JournalSerializer(serializers.ModelSerializer):
@@ -40,12 +55,6 @@ class JournalSerializer(serializers.ModelSerializer):
             'created_by': {'read_only': True}
         }
 
-# class DebtSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Debt
-#         fields = ('id', 'account', 'amount', 'reason', 'progress', 'lender', 'date_created')
-#         read_only_fields = ('date_created', 'date_modified')
-#
 #
 # class DocumentSerializer(serializers.ModelSerializer):
 #     class Meta:

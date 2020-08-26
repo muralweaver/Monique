@@ -37,24 +37,26 @@ class Journal(models.Model):
 
 class Debt(models.Model):
     PROGRESS = (
-        (0, 'In Progress'),
+        (0, 'Not Paid'),
         (1, 'Paid')
     )
-    lender = models.ForeignKey(Contact, default=1, on_delete=models.CASCADE)
-    amount = models.DecimalField(decimal_places=2, max_digits=6)
+    OWES = (
+        ('You owe', 'You owe'),
+        ('Owes you', 'Owes you')
+    )
+    contact = models.ForeignKey(Contact, related_name='debts', on_delete=models.CASCADE)
+    amount = models.DecimalField(decimal_places=2, max_digits=6, blank=False, null=False)
     reason = models.CharField("Reason", max_length=255)
+    owes = models.CharField("Owe", max_length=255, choices=OWES, blank=False, null=False)
     progress = models.CharField("Progress", max_length=255, choices=PROGRESS)
     created_by = models.CharField(max_length=255)
     date_created = models.DateTimeField(auto_now_add=True)
-
     '''
-        The Debt object allows to record that you own to contacts, or what your contacts own you.
+        The Debt object allows to record that you owe to contacts, or what your contacts owe you.
         A debt has to be linked to a contact
     '''
-
     def __str__(self):
-        return self.contact
-
+        return '{},{}, {}, {}'.format(self.amount, self.date_created, self.reason, self.pk,)
 
 # The Document object represents a document attached to a contact.
 # class Documents(models.Model):
