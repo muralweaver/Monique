@@ -5,11 +5,11 @@
 from django.http import Http404
 from rest_framework.response import Response
 
-from .models import Contact, Journal, Debt
+from .models import Contact, Journal, Debt, Note
 from rest_framework import viewsets, generics, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .serializers import (ContactSerializer, UserSerializer, JournalSerializer, DebtSerializer)
+from .serializers import (ContactSerializer, UserSerializer, JournalSerializer, DebtSerializer, NoteSerializer)
 from django.contrib.auth.models import User
 
 
@@ -73,6 +73,21 @@ class JournalList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
         """
         username = self.request.user.username
         return Journal.objects.filter(created_by=username)
+
+
+class NoteList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        username = self.request.user.username
+        serializer.save(created_by=username)
+
+    def get_queryset(self):
+        username = self.request.user.username
+        return Debt.objects.filter(created_by=username)
 
 
 class DebtList(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):

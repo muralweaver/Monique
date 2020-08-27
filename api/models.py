@@ -35,6 +35,19 @@ class Journal(models.Model):
         return self.title
 
 
+class Note(models.Model):
+    body = models.TextField("Body", max_length=500, blank=False, null=False)
+    contact = models.ForeignKey(Contact, related_name='notes', on_delete=models.CASCADE)
+    created_by = models.CharField(max_length=255)
+    date_modified = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    '''
+    The note allows to associate notes to contacts 
+    '''
+    def __str__(self):
+        return self.body
+
+
 class Debt(models.Model):
     PROGRESS = (
         (0, 'Not Paid'),
@@ -56,7 +69,7 @@ class Debt(models.Model):
         A debt has to be linked to a contact
     '''
     def __str__(self):
-        return '{},{}, {}, {}'.format(self.amount, self.date_created, self.reason, self.pk,)
+        return '{}, {}, {}, {}'.format(self.id, self.amount, self.reason, self.owes)
 
 # The Document object represents a document attached to a contact.
 # class Documents(models.Model):

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import ContactList, UserList, JournalList, DebtList
+from .views import ContactList, UserList, JournalList, DebtList, NoteList
 from rest_framework import routers
 
 # This router is similar to SimpleRouter, but additionally includes a default API root view, that returns a
@@ -8,6 +8,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register("journal", JournalList),
 router.register("contacts", ContactList),
+router.register("notes", NoteList),
 router.register("debts", DebtList),
 # router.register("documents", DocumentUploadView, basename="document-upload")
 router.register("users", UserList)
