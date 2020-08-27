@@ -8,6 +8,23 @@ A Personal Relationship Management tool
 
 ## Developer Installation
 
+### Brief Explanation on Django
+
+Django runs on an MVT (Model View Template) system which is different from MVC (Model View Controller) that powers Laravel.
+
+**Model:** The model in Django sets out the schema for our database. With Django’s ORM, you can declare the fields, field types and any extra data for instance Meta information.
+
+**View:** The View in Django, is where you set all of your code logic and algorithms. With the View, you can get some results from the database or manipulate some data. The view basically expects a request and a response. The response is usually a HTTP redirect, HTTP error (404), MimeTypes or a call to load a template.
+
+**Template:** The template in Django is the plain HTML code with Django’s Template Language in it. DTL (Django Template Language) is the language you’ll be using to dynamically write your template. You can do almost everything you’d with python and any other language.
+
+**Settings:** The settings file in Django, holds all the settings of your web app. It includes the secret key, templates directories, middlewares (security), static files (css,js), database settings and so on.
+
+**Url:** This does the same thing as routing in Angular or Laravel. It helps to connect the view to a url.
+> [Oyetoke Tobi Emmanuel](https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c)
+
+
+
 ```...```
 
 ## API Documentation
