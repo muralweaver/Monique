@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Contact(models.Model):
@@ -44,8 +45,29 @@ class Note(models.Model):
     '''
     The note allows to associate notes to contacts 
     '''
+
     def __str__(self):
-        return self.body
+        return '{}, {}'.format(self.id, self.body)
+
+
+class Task(models.Model):
+    title = models.CharField(max_length=255)
+    body = models.TextField(blank=True)
+    due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
+    contact = models.ForeignKey(Contact, related_name='tasks', on_delete=models.CASCADE)
+    created_by = models.CharField(max_length=255)
+    date_created = models.DateTimeField(auto_now_add=True)
+    '''
+    The Task object allows to add tasks about your contacts.
+    You can keep to put all of the tasks that you need to complete on a given day for a contact.
+    It can be very useful for managing time, by planning your day ahead of time, and prioritizing activities. 
+    '''
+
+    class Meta:
+        ordering = ["-date_created"]  # ordering by the created field
+
+    def __str__(self):
+        return '{}, {}, {}, {}, {}'.format(self.id, self.title, self.body, self.date_created, self.due_date)
 
 
 class Debt(models.Model):
@@ -68,6 +90,7 @@ class Debt(models.Model):
         The Debt object allows to record that you owe to contacts, or what your contacts owe you.
         A debt has to be linked to a contact
     '''
+
     def __str__(self):
         return '{}, {}, {}, {}'.format(self.id, self.amount, self.reason, self.owes)
 

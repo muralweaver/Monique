@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import Contact, Journal, Debt, Note
+from .models import Contact, Journal, Debt, Note, Task
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,6 +28,16 @@ class NoteSerializer(serializers.ModelSerializer):
         }
 
 
+class TaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ('id', 'title', 'contact', 'body', 'due_date', 'date_created')
+        read_only_fields = ('date_created',)
+        extra_kwargs = {
+            'created_by': {'read_only': True}
+        }
+
+
 class DebtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debt
@@ -38,12 +48,13 @@ class DebtSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     debts = serializers.StringRelatedField(many=True)
     notes = serializers.StringRelatedField(many=True)
+    tasks = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Contact
         fields = (
             'id', 'first_name', 'last_name', 'nickname', 'gender', 'is_dead', 'email', 'phone',
-            'description', 'debts', 'notes', 'date_created')
+            'description', 'debts', 'notes', 'tasks', 'date_created')
         read_only_fields = ('date_created',)
         extra_kwargs = {
             'created_by': {'read_only': True}
@@ -52,11 +63,14 @@ class ContactSerializer(serializers.ModelSerializer):
         def create(self, validated_data):
             debts_data = validated_data.pop('debts')
             notes_data = validated_data.pop('notes')
+            tasks_data = validated_data.pop('tasks')
             contact = Contact.objects.create(**validated_data)
             for debt_data in debts_data:
                 Debt.objects.create(contact=contact, **debt_data)
             for note_data in notes_data:
                 Note.objects.create(contact=contact, **note_data)
+            for task_data in tasks_data:
+                Task.objects.create(contact=contact, **task_data)
             return contact
 
 
