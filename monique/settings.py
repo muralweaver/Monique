@@ -95,7 +95,7 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'monique-db-dev-3',
+        'NAME': 'monique-db-dev-4',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',

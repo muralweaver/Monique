@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import Contact, Journal, Debt, Note, Task
+from .models import Contact, Journal, Debt, Note, Task, FoodPref
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,6 +38,15 @@ class TaskSerializer(serializers.ModelSerializer):
         }
 
 
+class FoodPrefSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FoodPref
+        fields = ('id', 'body', 'contact')
+        extra_kwargs = {
+            'created_by': {'read_only': True}
+        }
+
+
 class DebtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debt
@@ -49,12 +58,13 @@ class ContactSerializer(serializers.ModelSerializer):
     debts = serializers.StringRelatedField(many=True)
     notes = serializers.StringRelatedField(many=True)
     tasks = serializers.StringRelatedField(many=True)
+    foodprefs = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = Contact
         fields = (
             'id', 'first_name', 'last_name', 'nickname', 'gender', 'is_dead', 'email', 'phone',
-            'description', 'debts', 'notes', 'tasks', 'date_created')
+            'description', 'debts', 'notes', 'tasks', 'foodprefs', 'date_created')
         read_only_fields = ('date_created',)
         extra_kwargs = {
             'created_by': {'read_only': True}
@@ -64,6 +74,7 @@ class ContactSerializer(serializers.ModelSerializer):
             debts_data = validated_data.pop('debts')
             notes_data = validated_data.pop('notes')
             tasks_data = validated_data.pop('tasks')
+            foodprefs_data = validated_data.pop('foodprefs')
             contact = Contact.objects.create(**validated_data)
             for debt_data in debts_data:
                 Debt.objects.create(contact=contact, **debt_data)
@@ -71,6 +82,8 @@ class ContactSerializer(serializers.ModelSerializer):
                 Note.objects.create(contact=contact, **note_data)
             for task_data in tasks_data:
                 Task.objects.create(contact=contact, **task_data)
+            for foodpref_data in foodprefs_data:
+                    FoodPref.objects.create(contact=contact, **foodpref_data)
             return contact
 
 

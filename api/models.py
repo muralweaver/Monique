@@ -47,7 +47,21 @@ class Note(models.Model):
     '''
 
     def __str__(self):
-        return '{}, {}'.format(self.id, self.body)
+        return '{}, {}, {}'.format(self.id, self.body, self.date_created)
+
+
+class Note(models.Model):
+    body = models.TextField("Body", max_length=500, blank=False, null=False)
+    contact = models.ForeignKey(Contact, related_name='notes', on_delete=models.CASCADE)
+    created_by = models.CharField(max_length=255)
+    date_modified = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    '''
+    The note allows to associate notes to contacts 
+    '''
+
+    def __str__(self):
+        return '{}, {}, {}'.format(self.id, self.body, self.date_created)
 
 
 class Task(models.Model):
@@ -93,6 +107,12 @@ class Debt(models.Model):
 
     def __str__(self):
         return '{}, {}, {}, {}'.format(self.id, self.amount, self.reason, self.owes)
+
+
+class FoodPref(models.Model):
+    body = models.TextField("Body", max_length=500, blank=False, null=False)
+    contact = models.ForeignKey(Contact, related_name='foodprefs', on_delete=models.CASCADE)
+    created_by = models.CharField(max_length=255)
 
 # The Document object represents a document attached to a contact.
 # class Documents(models.Model):
