@@ -5,12 +5,12 @@
 from django.http import Http404
 from rest_framework.response import Response
 
-from .models import Contact, Journal, Debt, Note, Task, FoodPref
+from .models import Contact, Journal, Debt, Note, Task, FoodPref, PolicyDisclosure
 from rest_framework import viewsets, generics, status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from .serializers import (ContactSerializer, UserSerializer, JournalSerializer, DebtSerializer, NoteSerializer,
-                          TaskSerializer, FoodPrefSerializer)
+                          TaskSerializer, FoodPrefSerializer, PolicyDisclosureSerializer)
 from django.contrib.auth.models import User
 
 
@@ -135,6 +135,7 @@ class FoodPrefList(viewsets.ModelViewSet):
         username = self.request.user.username
         return FoodPref.objects.filter(created_by=username)
 
+
 # class DocumentUploadView(viewsets.ModelViewSet, generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Documents.objects.all()
 #     serializer_class = DocumentSerializer
@@ -152,3 +153,15 @@ class FoodPrefList(viewsets.ModelViewSet):
 #             filesize=0,
 #             filename=file[:10]
 #         )
+
+class PolicyDisclosure(viewsets.ModelViewSet):
+    queryset = PolicyDisclosure.objects.all()
+    serializer_class = PolicyDisclosureSerializer
+    authentication_classes = (TokenAuthentication,)
+
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import Contact, Journal, Debt, Note, Task, FoodPref
+from .models import Contact, Journal, Debt, Note, Task, FoodPref, PolicyDisclosure
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -83,7 +83,7 @@ class ContactSerializer(serializers.ModelSerializer):
             for task_data in tasks_data:
                 Task.objects.create(contact=contact, **task_data)
             for foodpref_data in foodprefs_data:
-                    FoodPref.objects.create(contact=contact, **foodpref_data)
+                FoodPref.objects.create(contact=contact, **foodpref_data)
             return contact
 
 
@@ -96,6 +96,7 @@ class JournalSerializer(serializers.ModelSerializer):
             'created_by': {'read_only': True}
         }
 
+
 #
 # class DocumentSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -103,3 +104,9 @@ class JournalSerializer(serializers.ModelSerializer):
 #         fields = "__all__"
 #         # read_only_fields = ('account', 'contact', 'date_created', 'date_modified')
 #
+
+
+class PolicyDisclosureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PolicyDisclosure
+        fields = ("title", "body", "date_modified",)
