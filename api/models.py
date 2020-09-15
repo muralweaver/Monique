@@ -114,6 +114,7 @@ class FoodPref(models.Model):
     contact = models.ForeignKey(Contact, related_name='foodprefs', on_delete=models.CASCADE)
     created_by = models.CharField(max_length=255)
 
+
 # The Document object represents a document attached to a contact.
 # class Documents(models.Model):
 #     contact = models.ForeignKey(Contact, default=2, on_delete=models.CASCADE)
@@ -127,3 +128,12 @@ class FoodPref(models.Model):
 #
 #     def __str__(self):
 #         return self.original_filename
+
+
+class PolicyDisclosure(models.Model):
+    title = models.CharField("Title", max_length=255,)
+    body = models.TextField("Body")
+    date_modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

@@ -1,5 +1,6 @@
 from django.urls import path, include
-from .views import ContactList, UserList, JournalList, DebtList, NoteList, TaskList, FoodPrefList
+
+from .views import ContactList, UserList, JournalList, DebtList, NoteList, TaskList, FoodPrefList, PolicyDisclosure
 from rest_framework import routers
 
 # This router is similar to SimpleRouter, but additionally includes a default API root view, that returns a
@@ -14,5 +15,6 @@ router.register("foodpref", FoodPrefList),
 router.register("debts", DebtList),
 # router.register("documents", DocumentUploadView, basename="document-upload")
 router.register("users", UserList)
+router.register("policies", PolicyDisclosure)
 
 urlpatterns = [path("", include(router.urls))]
