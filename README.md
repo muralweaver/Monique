@@ -1,6 +1,4 @@
-![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Panda_icon.svg/240px-Panda_icon.svg.png)
-
-# Monique [Work in progress]
+# Kuvha PRM
 
 A Personal Relationship Management tool
 
@@ -29,7 +27,7 @@ Django runs on an MVT (Model View Template) system which is different from MVC (
 
 ## API Documentation
 
-<!--**The rest of this document describes how to use some parts of Monique's API**-->
+<!--**The rest of this document describes how to use some parts of Kuvha's API**-->
 
 #### Contacts
 
@@ -120,7 +118,6 @@ The user represents the user you are currently logged in for each API call.
 
 ## Useful Links
 
-- [Monica API Documentation](https://www.monicahq.com/api/overview)
 - [Django Rest Framework](https://www.django-rest-framework.org/)
 - [Adding Object Level Permissions](https://dragonprogrammer.com/object-level-permissions-drf/)
 - [DRF File Upload](https://medium.com/@jxstanford/django-rest-framework-file-upload-e4bc8de669c0)
