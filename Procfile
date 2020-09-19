@@ -1,1 +1,1 @@
-web: gunicorn monique.wsgi
+web: gunicorn kuvha.wsgi:application --log-file -
