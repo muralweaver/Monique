@@ -1,12 +1,10 @@
 # Kuvha PRM
 
 - [Introduction](#introduction)
-  - [Purpose](#purpose)
   - [Features](#features)
   - [Who is it for?](#who-is-it-for)
-  - [What Kuvha isn't](#what-monica-isnt)
-  - [Thank you, open source](#thank-you-open-source)
-- [License](#license)
+  - [What Kuvha isn't](#what-kuvha-isnt)
+  - [Open thank you to open source](#open-thank-you-to-open-source)
 
 
 ## Introduction
@@ -53,7 +51,7 @@ In today's digital age, it's easy to lose touch. This project is to help people 
 - [ ] Export a contact as vCard
 - [ ] Ability to define custom activity types
 - [ ] Ability to favorite contacts
-- [ ] Track conversations made on social media or SMS
+- [ ] ~~Trail conversations made on social media or SMS~~
 - [ ] Multi users
 - [ ] Labels to organize contacts
 - [ ] Multi languages
