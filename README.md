@@ -36,22 +36,16 @@ In today's digital age, it's easy to lose touch. This project is to help people 
 - [ ] Reminders
 - [ ] Auto reminders for birthdays
 - [ ] Stay in touch with a contact by sending reminders at a given interval
-- [ ] Management of debts
 - [x] Ability to add notes to a contact
 - [ ] Ability to indicate how you've met someone
 - [ ] Management of activities done with a contact
-- [ ] Management of tasks
-- [ ] Management of gifts
 - [ ] Management of addresses and all the different ways to contact someone
-- [ ] Management of contact pets
-- [x] Basic journal
-- [ ] Ability to indicate how the day went
+- [ ] Space to write notes about your friends’ work, family, pets, gift ideas, money they owe you, and set reminders about important dates.
+- [x] Basic journal e.g. how the day went
 - [ ] Upload documents and photos
 - [ ] Export and import of data
 - [ ] Export a contact as vCard
 - [ ] Ability to define custom activity types
-- [ ] Ability to favorite contacts
-- [ ] ~~Trail conversations made on social media or SMS~~
 - [ ] Multi users
 - [ ] Labels to organize contacts
 - [ ] Multi languages
