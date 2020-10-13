@@ -4,6 +4,7 @@
   - [Features](#This-api-functions-include)
   - [Who is it for?](#who-is-it-for)
   - [What Kuvha isn't](#what-kuvha-isnt)
+  - [Getting started](#getting-started)
   - [Open thank you to open source](#open-thank-you-to-open-source)
 
 
