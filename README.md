@@ -1,7 +1,7 @@
 # Kuvha PRM
 
 - [Introduction](#introduction)
-  - [Features](#features)
+  - [Features](#This-api-functions-include)
   - [Who is it for?](#who-is-it-for)
   - [What Kuvha isn't](#what-kuvha-isnt)
   - [Open thank you to open source](#open-thank-you-to-open-source)
@@ -26,8 +26,25 @@ In today's digital age, it's easy to lose touch. This project is to help people 
  * Kuvha is not a smart assistant - it won't guess what you want to do.
  * Kuvha is not a tool that will scan your data and do nasty things with it.
 
+## Getting started
 
-### Features
+### Prerequirements
+
+### Download the code
+- Clone this repo to your local drive.
+
+### Local installation
+- Open terminal window and navigate to your kuvha local drive directory
+- Create new python virtual environment by running python3 -m venv venv
+- Activate new virtual environment by running source venv/bin/activate
+- Install project dependencies by running pip install -r requirements.txt
+
+### Take it for a spin
+- Make sure your python virtual environment activated source venv/bin/activate
+- Start django application python3 manage.py runserver
+- Done - try out the different API calls
+
+### This api functions include:
 
 - [x] Add contacts
   - [ ] Bulk add contacts
@@ -56,4 +73,4 @@ In today's digital age, it's easy to lose touch. This project is to help people 
 Kuvha uses a lot of open source projects. The vision and generosity of the open source community has let us explore potential applications, ideas, algorithms and designs … for free! The hope is that by providing Kuvha as a free, open source project it will help other people the same way those free open source softwares have helped make this possible. 
 
 
-Inspired by the awesome open-source web application [Monica](https://github.com/monicahq)
+Inspired by and obviously heavily referenced by the awesome open-source web application [Monica](https://github.com/monicahq)
