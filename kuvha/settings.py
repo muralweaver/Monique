@@ -27,12 +27,11 @@ if os.path.isfile(dotenv_file):
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
 
 # Application definition
 
@@ -88,7 +87,7 @@ WSGI_APPLICATION = "kuvha.wsgi.application"
 
 
 DATABASES["default"] = dj_database_url.config(
-    default=os.getenv("DATABASE_URL"), conn_max_age=600, ssl_require=False,
+    default=os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=False,
 )
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -154,7 +153,7 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 
-EMAIL_HOST = (os.getenv("EMAIL_HOST"),)
-EMAIL_HOST_USER = (os.getenv("EMAIL_HOST_USER"),)
-EMAIL_HOST_PASSWORD = (os.getenv("EMAIL_HOST_PASSWORD"),)
-EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST = (os.environ.get("EMAIL_HOST"),)
+EMAIL_HOST_USER = (os.environ.get("EMAIL_HOST_USER"),)
+EMAIL_HOST_PASSWORD = (os.environ.get("EMAIL_HOST_PASSWORD"),)
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
