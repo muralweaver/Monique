@@ -75,3 +75,8 @@ Kuvha uses a lot of open source projects. The vision and generosity of the open 
 
 
 Inspired by and obviously heavily referenced by the awesome open-source web application [Monica](https://github.com/monicahq)
+
+
+## Useful Links
+
+- [Structuring Your Project](https://docs.python-guide.org/writing/structure/)
