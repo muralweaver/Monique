@@ -78,7 +78,9 @@ Kuvha uses a lot of open source projects. The vision and generosity of the open 
 
 Inspired by and obviously heavily referenced by the awesome open-source web application [Monica](https://github.com/monicahq)
 
-## API Doc
+## API Documentation
+The complete documentation explains every API endpoint and gives you the ability to try them without writing any code.
+
 https://documenter.getpostman.com/view/10061488/TVRg69Dd
 
 ## Useful Links
