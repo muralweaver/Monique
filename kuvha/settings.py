@@ -147,10 +147,7 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ORIGIN_WHITELIST = (
-    "http://localhost:3000",
-    "http://localhost:19006",
-)
+CORS_ORIGIN_WHITELIST = ("http://localhost:3000", os.environ.get("CORS_PROD_URL"))
 
 
 EMAIL_HOST = (os.environ.get("EMAIL_HOST"),)
