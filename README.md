@@ -7,7 +7,7 @@ Personal contacts manager. A place for notes, but for the people I keep in touch
   - [What Kuvha isn't](#what-kuvha-isnt)
   - [Getting started](#getting-started)
   - [Open thank you to open source](#open-thank-you-to-open-source)
-  - [API Doc]
+  - [Kuvha API Documentation](#api-doc)
 
 
 ## Introduction
