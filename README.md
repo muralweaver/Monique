@@ -1,4 +1,5 @@
 # Kuvha PRM
+Personal contacts manager. A place for notes, but for the people I keep in touch with.
 
 - [Introduction](#introduction)
   - [Features](#This-api-functions-include)
@@ -6,11 +7,12 @@
   - [What Kuvha isn't](#what-kuvha-isnt)
   - [Getting started](#getting-started)
   - [Open thank you to open source](#open-thank-you-to-open-source)
+  - [API Doc]
 
 
 ## Introduction
 
-Kuvha is an open-source web application tool to organize the interactions with your loved ones. Think of it as a [CRM](https://en.wikipedia.org/wiki/Customer_relationship_management) 
+Kuvha is an open-source web application tool to organize the interactions with people you keep in touch with. Think of it as a [CRM](https://en.wikipedia.org/wiki/Customer_relationship_management).
 
 
 ### Who is it for?
@@ -76,6 +78,8 @@ Kuvha uses a lot of open source projects. The vision and generosity of the open 
 
 Inspired by and obviously heavily referenced by the awesome open-source web application [Monica](https://github.com/monicahq)
 
+## API Doc
+https://documenter.getpostman.com/view/10061488/TVRg69Dd
 
 ## Useful Links
 
