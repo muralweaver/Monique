@@ -76,7 +76,7 @@ In today's digital age, it's easy to lose touch. This project is to help people 
 Kuvha uses a lot of open source projects. The vision and generosity of the open source community has let us explore potential applications, ideas, algorithms and designs … for free! The hope is that by providing Kuvha as a free, open source project it will help other people the same way those free open source softwares have helped make this possible. 
 
 
-Inspired by and obviously heavily referenced by the awesome open-source web application [Monica](https://github.com/monicahq)
+Inspired by [Monica](https://github.com/monicahq)
 
 ## API Documentation
 The complete documentation explains every API endpoint and gives you the ability to try them without writing any code.
